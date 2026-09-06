@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call room</title>
+    <script src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js"></script>
+    <link rel="stylesheet" href="css/voice.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="loading-view" id="loading-view" role="status" aria-live="polite">
+        <span class="loading-spinner" aria-hidden="true"></span>
+    </div>
+    <a class="settings-link" href="html/user_setting.html" aria-label="プロフィール設定">
+        <i class="fa-solid fa-gear" aria-hidden="true"></i>
+    </a>
+    <main class="app-shell">
+        <section class="call-view waiting-view is-hidden" id="waiting-view" aria-labelledby="waiting-title">
+            <div class="match-label" aria-hidden="true" id="match-label" style="display: none;">
+                　　　相手を探しています
+            </div>
+            <h1 id="waiting-title">Call room</h1>
+            <p class="saved-profile" id="saved-profile"></p>
+            <button class="start-button" id="voice-chat-button" type="button">
+                <span class="button-icon" aria-hidden="true">☎</span>
+                <span >通話を始める</span>
+            </button>
+        </section>
+        <section class="select-info" id="select-info" aria-labelledby="select-info-title" style="display: none;">
+            <div class="form-mark" aria-hidden="true">◒</div>
+            <p class="eyebrow">FIRST VISIT</p>
+            <h2 class="title" id="select-info-title">プロフィールを入力してください</h2>
+            <p class="form-note">次回から入力を省略できるよう、この端末に保存します。</p>
+            <div class="info-select">
+                <label for="name">名前</label>
+                <input type="text" id="name" name="name" maxlength="40" autocomplete="name" required>
+            </div>
+            <div class="info-select">
+                <label for="gender">性別</label>
+                <select id="gender" name="gender" required>
+                    <option value="">選択してください</option>
+                    <option value="male">男性</option>
+                    <option value="female">女性</option>
+                    <option value="other">その他</option>
+                </select>
+            </div>
+            <label class="terms-agreement" for="terms-agreement">
+                <input type="checkbox" id="terms-agreement" checked>
+                <span>利用規約に同意する</span>
+            </label>
+            <a class="terms-link" href="html/use_rule.html">利用規約を閲覧する</a>
+            <div>
+            <button id="info-decited-button" type="button">決定</button>
+            </div>
+            <p class="form-error" id="form-error" role="alert" aria-live="polite"></p>
+        </section>
+        <section class="peer-info-view" id="peer-info-view" aria-labelledby="peer-info-title" style="display: none;">
+            <p class="peer-name" id="matched-peer-name"></p>
+            <p class="peer-gender" id="matched-peer-gender"></p>
+            <div class="match-label peer-response-label" id="peer-response-label" role="status" style="display: none;">相手の返答を待っています。</div>
+            <button id="start-call-button" type="button">OK</button>
+            <button id="cancel-call-button" type="button">キャンセル</button>
+        </section>
+    </main>
+    <section class="is-hidden" id="voice-view">
+        <main class="voice-shell">
+            <div class="peer-call-status">
+                <p class="status-label" id="peer-name"></p>
+                <video class="status-video" id="remote-video" autoplay playsinline hidden></video>
+                <div class="peer-status-icon" id="peer-status-icon" aria-label="相手のマイクはオンです">
+                    <i class="fa-solid fa-microphone-lines" id="peer-mike-on-icon" aria-hidden="true"></i>
+                    <i class="fa-solid fa-microphone-lines-slash" id="peer-mike-off-icon" aria-hidden="true" hidden></i>
+                </div>
+            </div>
+            <div class="my-call-status">
+                <p class="status-label">あなた</p>
+                <video class="status-video" id="local-video" autoplay muted playsinline hidden></video>
+                <div class="my-status-icon" id="my-status-icon" aria-hidden="true"><i class="fa-solid fa-microphone-lines"></i></div>
+            </div>
+            <section class="voice-screen">
+                <aside class="chat-sheet" id="chat-sheet" aria-label="チャット">
+                    <div class="sheet-handle"></div>
+                    <div class="chat-sheet-heading"><strong>チャット</strong><button class="close-chat" id="close-chat" type="button" aria-label="チャットを閉じる">×</button></div>
+                    <div class="chat" id="chat-messages"></div>
+                    <div class="chat-input-row"><input type="text" class="chat-input" id="chat-input" placeholder="メッセージを入力..." aria-label="メッセージを入力"><button class="send-chat" id="send-chat" type="button" aria-label="送信">➤</button></div>
+                </aside>
+                <div class="call-controls" aria-label="通話コントロール">
+                    <button class="control-button" id="chat-button" type="button" aria-label="チャットを開く"><i class="fa-regular fa-comment" id="chat-on-button" style="display:none;"></i><i class="fa-regular fa-comment-slash" id="chat-off-button"></i></button>
+                    <button class="control-button" id="mic-button" type="button" aria-label="マイクをオンにする"><i class="fa-solid fa-microphone-lines" id="mike-on-button"></i><i class="fa-solid fa-microphone-lines-slash" id="mike-off-button" style="display:none;"></i></button>
+                    <button class="control-button" id="video-button" type="button" aria-label="ビデオをオンにする"><i class="fa-solid fa-video-slash" id="video-off-button"></i><i class="fa-solid fa-video" id="video-on-button" style="display:none;"></i></button>
+                    <button class="control-button end-call-button" id="end-call-button" type="button" aria-label="通話を終了する"><span aria-hidden="true">×</span><small>終了</small></button>
+                </div>
+            </section>
+        </main>
+    </section>
+    <script defer src="https://use.fontawesome.com/releases/v7.3.1/js/all.js"></script>
+    <script src="js/voice.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
+</html>

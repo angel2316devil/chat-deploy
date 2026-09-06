@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>プロフィール設定 | Call room</title>
+	<link rel="stylesheet" href="../css/user_setting.css">
+</head>
+<body>
+	<main class="settings-page">
+		<a class="back-link" href="../index.html" aria-label="ホームへ戻る">&larr;</a>
+		<form class="settings-form" id="profile-form">
+			<p class="eyebrow">PROFILE SETTINGS</p>
+			<h1>プロフィール設定</h1>
+			<label for="name">名前</label>
+			<input type="text" id="name" name="name" maxlength="40" autocomplete="name" required>
+			<label for="gender">性別</label>
+			<select id="gender" name="gender" required>
+				<option value="">選択してください</option>
+				<option value="male">男性</option>
+				<option value="female">女性</option>
+				<option value="other">その他</option>
+			</select>
+			<p class="form-error" id="form-error" role="alert" aria-live="polite"></p>
+			<button type="submit">保存</button>
+		</form>
+	</main>
+	<script src="../js/user_setting.js"></script>
+</body>
+</html>

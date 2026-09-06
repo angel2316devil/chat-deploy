@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
+
+:root {
+	color-scheme: dark;
+	--ink: #f5f1e9;
+	--muted: #c0c8bc;
+	--line: rgba(245, 241, 233, .18);
+	--accent: #d7f06a;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	min-width: 320px;
+	min-height: 100vh;
+	margin: 0;
+	background: #75c94b;
+	color: var(--ink);
+	font-family: Meiryo, sans-serif;
+}
+
+.settings-page {
+	display: grid;
+	place-items: center;
+	min-height: 100vh;
+	padding: 28px;
+}
+
+.back-link {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	display: grid;
+	place-items: center;
+	width: 44px;
+	height: 44px;
+	border: 1px solid rgba(255, 255, 255, .45);
+	border-radius: 50%;
+	color: #fff;
+	font-size: 25px;
+	text-decoration: none;
+}
+
+.settings-form {
+	display: grid;
+	width: min(100%, 420px);
+	gap: 8px;
+	padding: 28px 24px;
+	border: 1px solid var(--line);
+	border-radius: 8px;
+	background: rgba(27, 27, 26, .88);
+}
+
+.eyebrow {
+	margin: 0 0 8px;
+	color: var(--muted);
+	font: 500 11px Meiryo, sans-serif;
+	letter-spacing: .16em;
+}
+
+h1 {
+	margin: 0 0 16px;
+	font-size: 22px;
+	font-weight: 500;
+}
+
+label {
+	margin-top: 8px;
+	color: var(--muted);
+	font-size: 11px;
+}
+
+input,
+select,
+button {
+	font: inherit;
+}
+
+input,
+select {
+	width: 100%;
+	padding: 12px 13px;
+	border: 1px solid var(--line);
+	border-radius: 5px;
+	background: rgba(255, 255, 255, .06);
+	color: var(--ink);
+}
+
+select option {
+	background: #242620;
+}
+
+button {
+	margin-top: 12px;
+	padding: 13px;
+	border: 0;
+	border-radius: 5px;
+	background: var(--accent);
+	color: #171913;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.form-error {
+	min-height: 18px;
+	margin: 2px 0 0;
+	color: #f08b82;
+	font-size: 11px;
+}

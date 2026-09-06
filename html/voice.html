@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>通話中 | Call room</title>
+	<link rel="stylesheet" href="../css/voice.css">
+	<script src="https://unpkg.com/peerjs@1.5.5/dist/peerjs.min.js"></script>
+	<script defer src="https://use.fontawesome.com/releases/v7.3.1/js/all.js"></script>
+</head>
+
+<body>
+	<main class="voice-shell">
+		<div class="peer-call-status" id="peer-call-status">
+			<p class="status-label" id="peer-name"></p>
+			<video class="status-video" id="remote-video" autoplay playsinline hidden></video>
+			<div class="peer-status-icon" id="peer-status-icon" aria-label="相手のマイクはオンです">
+			 <i class="fa-solid fa-microphone-lines-slash" id="peer-mike-off-icon" hidden></i>
+			 <i class="fa-solid fa-microphone-lines" id="peer-mike-on-icon" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div class="my-call-status" id="my-call-status">
+			<p class="status-label">あなた</p>
+			<video class="status-video" id="local-video" autoplay muted playsinline hidden></video>
+			<div class="my-status-icon" id="my-status-icon" aria-hidden="true">
+             <i class="fa-solid fa-microphone-lines-slash" id="my-mike-off-icon" style="display:none;"></i>
+			 <i class="fa-solid fa-microphone-lines" id="my-mike-on-icon"></i>
+			</div>
+		</div>
+		<section class="voice-screen" aria-labelledby="call-status">
+			<aside class="chat-sheet" id="chat-sheet" aria-label="チャット">
+				<div class="sheet-handle" ></div>
+				<div class="chat-sheet-heading">
+					<strong>チャット</strong>
+					<button class="close-chat" id="close-chat" type="button" aria-label="チャットを閉じる">×</button>
+				</div>
+				<div class="chat" id="chat-messages"></div>
+				<div class="chat-input-row">
+					<input type="text" class="chat-input" id="chat-input" placeholder="メッセージを入力..."
+						aria-label="メッセージを入力">
+					<button class="send-chat" id="send-chat" type="button" aria-label="送信">➤</button>
+				</div>
+			</aside>
+			<div class="call-controls" aria-label="通話コントロール">
+				<button class="control-button" id="chat-button" type="button" aria-label="チャットを開く">
+					<i class="fa-regular fa-comment" id="chat-on-button" style="display:none;"></i>
+					<i class="fa-regular fa-comment-slash" id="chat-off-button"></i>
+				</button>
+				<button class="control-button" id="mic-button" type="button" aria-label="マイクをオンにする">
+					<i class="fa-solid fa-microphone-lines-slash" id="mike-off-button" style="display:none;"></i>
+					<i class="fa-solid fa-microphone-lines" id="mike-on-button"></i>
+				</button>
+				<button class="control-button" id="video-button" type="button" aria-label="ビデオをオンにする">
+					<i class="fa-solid fa-video-slash" id="video-off-button"></i>
+					<i class="fa-solid fa-video" id="video-on-button" style="display:none;"></i>
+				</button>
+				<button class="control-button end-call-button" id="end-call-button" type="button" aria-label="通話を終了する">
+					<span aria-hidden="true">×</span><small>終了</small>
+				</button>
+			</div>
+
+		</section>
+	</main>
+	<script src="../js/voice.js"></script>
+</body>
+
+</html>
