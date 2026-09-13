@@ -1,5 +1,3 @@
-import { WS_BASE_URL } from './config.js';
-
 console.log("PeerJSを使ってサーバーに接続します");
 const loadingView = document.getElementById('loading-view');
 const loadingMessage = document.getElementById('loading-message');
@@ -211,8 +209,7 @@ const getWebSocketUrl = () => {
         peer_id: peer.id,
     });
     console.log(peer.id);
-    const baseUrl = (typeof WS_BASE_URL !== 'undefined' ? WS_BASE_URL : '').replace(/\/+$/, '');
-    return `${baseUrl}/ws/match?${params.toString()}`;
+    return `wss://chat-center-1041883752140.europe-west1.run.app/ws/match?${params.toString()}`;
 };
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
