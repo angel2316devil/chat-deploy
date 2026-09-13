@@ -6,3 +6,5 @@ node_modules
 dist
 git
 .vscode
+.env
+config.js

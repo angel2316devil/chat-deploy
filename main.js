@@ -1,3 +1,5 @@
+import { WS_BASE_URL } from './config.js';
+
 console.log("PeerJSを使ってサーバーに接続します");
 const loadingView = document.getElementById('loading-view');
 const loadingMessage = document.getElementById('loading-message');
@@ -203,14 +205,14 @@ termsAgreement?.addEventListener('change', () => {
     }
 });
 const getWebSocketUrl = () => {
-    const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
     const params = new URLSearchParams({
         user_name: userparms.name,
         user_gender: userparms.gender,
         peer_id: peer.id,
     });
     console.log(peer.id);
-    return `ws://127.0.0.1:8080/ws/match?${params.toString()}`;
+    const baseUrl = (typeof WS_BASE_URL !== 'undefined' ? WS_BASE_URL : '').replace(/\/+$/, '');
+    return `${baseUrl}/ws/match?${params.toString()}`;
 };
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
